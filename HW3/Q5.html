@@ -25,25 +25,21 @@
       const nameReg = /^[A-Za-z\s]+$/;
       const availableProducts = ["Pen", "Notebook", "Pencil"];
 
-      // a. Validate name
       if (!nameReg.test(name)) {
         alert("Customer name must contain only letters and cannot be empty.");
         return;
       }
 
-      // b. Validate product
       if (!availableProducts.includes(product)) {
         alert(`Product is Not Available . Available products: ${availableProducts.join(", ")}`);
         return;
       }
 
-      // c. Validate address
       if (address === "") {
         alert("Address cannot be empty.");
         return;
       }
 
-      // d. Store order in localStorage
       const order = {
         name: name,
         product: product,
@@ -56,7 +52,6 @@
 
       alert("Order submitted successfully!");
 
-      // Optional: Clear form
       document.getElementById("name").value = "";
       document.getElementById("product").value = "";
       document.getElementById("address").value = "";
