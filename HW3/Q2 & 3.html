@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product List</title>
+</head>
+<body>
+  <h3>Product Entry</h3>
+  Product: <input type="text" id="Product" />
+  <button id="myButton">Add Product</button>
+  <button id="clearButton">Clear Cart</button>
+
+  <ul id="ul">
+    <li>Laptop</li>
+    <li>Mobile</li>
+    <li>Car</li>
+  </ul>
+
+  <script>
+    //  Add Product & store in localStorage
+    const myButton = document.getElementById("myButton");
+    myButton.addEventListener("click", () => {
+      const input = document.getElementById("Product");
+      const value = input.value.trim();
+      if (!value) return;
+
+      // Add new <li> to the list
+      const ul = document.getElementById("ul");
+      const li = document.createElement("li");
+      li.innerText = value;
+      ul.appendChild(li);
+
+      // Store list items in localStorage
+      let items = JSON.parse(localStorage.getItem("products")) || [];
+      items.push(value);
+      localStorage.setItem("products", JSON.stringify(items));
+
+      // Update and store count
+      let count = parseInt(localStorage.getItem("productCount")) || 0;
+      count++;
+      localStorage.setItem("productCount", count);
+
+      // Show alert with updated count
+      alert(`You have added ${count} items to the cart`);
+
+      input.value = "";
+    });
+
+    //  Load previously saved items on page load
+    window.addEventListener("load", () => {
+      const ul = document.getElementById("ul");
+      const items = JSON.parse(localStorage.getItem("products")) || [];
+      items.forEach(item => {
+        const li = document.createElement("li");
+        li.innerText = item;
+        ul.appendChild(li);
+      });
+    });
+
+    //  Clear localStorage and reset counter
+    const clearButton = document.getElementById("clearButton");
+    clearButton.addEventListener("click", () => {
+      localStorage.removeItem("products");
+      localStorage.removeItem("productCount");
+      alert("Cart has been reset!");
+
+      // Remove all added items (keep original 3)
+      const ul = document.getElementById("ul");
+      while (ul.children.length > 3) {
+        ul.removeChild(ul.lastChild);
+      }
+    });
+  </script>
+</body>
+</html>

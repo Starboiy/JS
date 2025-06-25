@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interaction</title>
+</head>
+<body>
+  <h2>Product List</h2>
+
+  Product: <input type="text" class="Product" />
+  <button class="addBtn">Add Product</button>
+
+  <ul class="productList">
+    <li>Laptop</li>
+    <li>Mobile</li>
+    <li>Car</li>
+  </ul>
+
+  <hr>
+
+  <button class="dblClickBtn" ondblclick="doubleClickAlert()">Double Click Me</button>
+  <button class="keyBtn" onkeypress="keyAlert()">Press a Key</button>
+  <button class="hoverBtn" onmouseover="hoverAlert()">Hover Over Me</button>
+
+  <script>
+ 
+    const addBtn = document.getElementsByClassName("addBtn")[0];
+    const input = document.getElementsByClassName("Product")[0];
+    const ul = document.getElementsByClassName("productList")[0];
+
+    // Add Product Button
+    addBtn.addEventListener("click", () => {
+      const value = input.value.trim();
+      if (value === "") return;
+
+      const li = document.createElement("li");
+      li.innerText = value;
+      ul.appendChild(li);
+      localStorage.setItem("li", value);
+
+      alert("Added to cart");
+      input.value = "";
+    });
+
+    // Mouse: Double Click Alert
+    function doubleClickAlert() {
+      alert("You double-clicked the button!");
+    }
+
+    // Keyboard: Key Press Alert
+    function keyAlert() {
+      alert("A key was pressed on the button!");
+    }
+
+    // Mouse: Hover Alert
+    function hoverAlert() {
+      alert("You hovered over the button!");
+    }
+  </script>
+</body>
+</html>

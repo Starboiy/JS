@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+Name :    <input type="text" id="name"> 
+<br>
+Price:    <input type="text" id="price"> 
+<br>
+Quantity: <input type="text" id="quantity"> 
+<br>
+
+<button id="btn">Submit</button>
+
+<script>
+
+    const btn = document.getElementById("btn");
+    btn.addEventListener("click",()=>{
+        const name = document.getElementById("name").value;
+        const price = document.getElementById("price").value;
+        const quantity = document.getElementById("quantity").value;
+
+
+        const nameReg = /^[A-Za-z\s]+$/;
+        const priceReg = /^[\d]+$/;
+        const quantityReg = /^[1-9]\d*$/;
+  
+        if(!nameReg.test(name)){
+            alert("Product Should not be Empty and be valid");
+        }
+
+        if(!priceReg.test(price)){
+            alert("Price Should be positive");
+        }
+
+        if(!quantityReg.test(quantity)){
+            alert("Quantity Should be numeric value");
+        }
+
+        let details = [name,price,quantity];
+        let existingdetails = JSON.parse(localStorage.getItem("data"))||[];
+        existingdetails.push(details);
+        localStorage.setItem("data",JSON.stringify(existingdetails));
+
+    })
+</script>
+</body>
+</html>

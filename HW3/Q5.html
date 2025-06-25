@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Order Form</title>
+</head>
+<body>
+  <h2>Order Form</h2>
+
+  Customer Name: <input type="text" id="name"> <br><br>
+  Product: <input type="text" id="product"> <br><br>
+  Address: <textarea id="address" rows="4" cols="30"></textarea> <br><br>
+
+  <button id="btn">Submit</button>
+
+  <script>
+    const btn = document.getElementById("btn");
+
+    btn.addEventListener("click", () => {
+      const name = document.getElementById("name").value.trim();
+      const product = document.getElementById("product").value.trim();
+      const address = document.getElementById("address").value.trim();
+
+      const nameReg = /^[A-Za-z\s]+$/;
+      const availableProducts = ["Pen", "Notebook", "Pencil"];
+
+      // a. Validate name
+      if (!nameReg.test(name)) {
+        alert("Customer name must contain only letters and cannot be empty.");
+        return;
+      }
+
+      // b. Validate product
+      if (!availableProducts.includes(product)) {
+        alert(`Product is Not Available . Available products: ${availableProducts.join(", ")}`);
+        return;
+      }
+
+      // c. Validate address
+      if (address === "") {
+        alert("Address cannot be empty.");
+        return;
+      }
+
+      // d. Store order in localStorage
+      const order = {
+        name: name,
+        product: product,
+        address: address
+      };
+
+      const existingOrders = JSON.parse(localStorage.getItem("orders") || "[]");
+      existingOrders.push(order);
+      localStorage.setItem("orders", JSON.stringify(existingOrders));
+
+      alert("Order submitted successfully!");
+
+      // Optional: Clear form
+      document.getElementById("name").value = "";
+      document.getElementById("product").value = "";
+      document.getElementById("address").value = "";
+    });
+  </script>
+</body>
+</html>

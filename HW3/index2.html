@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    EventListner <button id="btn">Submit</button>
+    <br><br> 
+    Inline  <button id="btn1" onclick="cleck()">Submit</button>
+
+
+    <script>
+        // 1. Using addEventListener
+        const button = document.getElementById("btn");
+       button.addEventListener("click",()=>{
+            alert("You clicked");
+        })
+        // 2. Function for inline onclick
+        function cleck(){
+                alert("Clecked");
+            }
+    </script>
+</body>
+</html>

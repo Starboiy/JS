@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=bu, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Product <input type="text" name="" id = "Product">
+    <button id = "btn" onclick="cleck()">Add Product</button> 
+    <ul id="ul">
+    <li>Laptop</li>
+    <li>Mobile</li>
+    <li>Car</li>
+    </ul>
+    
+    <script>
+      const btn =  document.getElementById("btn");
+      btn.addEventListener("click",()=>{
+       const Product =  document.getElementById("Product");
+       console.log(Product.value);
+       const ul = document.getElementById("ul");
+       
+       const li = document.createElement("li");
+
+       li.innerText= Product.value;
+       ul.append(li);
+       localStorage.setItem("li",Product.value);
+      });
+
+      function cleck(){
+        alert("Added to cart")
+      }
+    </script>
+</body>
+</html>
